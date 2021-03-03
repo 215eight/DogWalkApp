@@ -43,7 +43,7 @@ extension RootRouter: RootRouting {
 
     func routeAwayFromDogWalks(_ router: DogWalksRouter) {
         viewModel.navigationPresenter.pop(router, from: self) {
-            print("Yeah")
+            self.dogWalksRouter = nil
         }
     }
 }
