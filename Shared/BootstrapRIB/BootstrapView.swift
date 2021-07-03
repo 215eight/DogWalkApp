@@ -10,7 +10,7 @@ import SwiftUI
 import RIBs
 
 final class BootstrapViewModel: ObservableObject {
-    @Published var rootView: RootPresentationView?
+    @Published var rootView: Viewable?
 }
 
 struct BootstrapView: View {
@@ -24,7 +24,7 @@ struct BootstrapView: View {
     @ViewBuilder var body: some View {
         if let rootView = viewModel.rootView {
             NavigationView {
-                rootView.uiView
+                rootView.view
             }
             .navigationViewStyle(StackNavigationViewStyle())
         } else {

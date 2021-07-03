@@ -14,20 +14,18 @@ protocol RootRouting: ViewableRouting {
     func routeAwayFromDogWalks(_ router: DogWalksRouter)
 }
 
-final class RootRouter: ViewableRouter<RootInteractable, RootPresentationView> {
+final class RootRouter: ViewableRouter<RootInteractable, RootPresentationViewModel> {
 
     private var dogWalksRouter: DogWalksRouter?
 
-    private let viewModel: RootPresentationViewModel
     private let dogWalkBuilder: DogWalksBuilder
 
     init(interactor: RootInteractable,
-         view: RootPresentationView,
          viewModel: RootPresentationViewModel,
+         viewable: Viewable,
          dogWalkBuilder: DogWalksBuilder) {
-        self.viewModel = viewModel
         self.dogWalkBuilder = dogWalkBuilder
-        super.init(interactor: interactor, view: view)
+        super.init(interactor: interactor, viewModel: viewModel, viewable: viewable)
         interactor.router = self
     }
 }
@@ -36,8 +34,11 @@ extension RootRouter: RootRouting {
 
     func routeToDogWalks(dog: Dog) {
         let router = dogWalkBuilder.build(dog: dog, listener: interactor)
+
         viewModel.navigationPresenter.push(router, from: self) {
             self.dogWalksRouter = router
+        } onDismiss: {
+            self.dogWalksRouter = nil
         }
     }
 

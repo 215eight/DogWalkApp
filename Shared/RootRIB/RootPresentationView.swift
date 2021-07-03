@@ -13,7 +13,7 @@ final class RootPresentationViewModel: ObservableObject {
     @Published var navigationPresenter = NavigationPresenter<DogWalksRouter>()
 }
 
-struct RootPresentationView: Viewable {
+struct RootPresentationView: View, Viewable {
 
     @ObservedObject private var viewModel: RootPresentationViewModel
     private let rootView: RootView

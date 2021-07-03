@@ -13,7 +13,7 @@ final class DogWalksPresentationViewModel: ObservableObject {
 
 }
 
-struct DogWalksPresentationView: Viewable {
+struct DogWalksPresentationView: View, Viewable {
 
     @ObservedObject private var viewModel: DogWalksPresentationViewModel
     private let dogWalksView: DogWalksView

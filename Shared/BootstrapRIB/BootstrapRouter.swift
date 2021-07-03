@@ -13,16 +13,14 @@ protocol BootstrapRouting: ViewableRouting {
     func routeToRoot(component: BootstrapComponent)
 }
 
-final class BootstrapRouter: ViewableRouter<BootstrapInteractable, BootstrapPresentationView> {
+final class BootstrapRouter: ViewableRouter<BootstrapInteractable, BootstrapPresentationViewModel> {
 
-    private var rootRouter: RootRouter?
-    private let viewModel: BootstrapPresentationViewModel
+    private var rootRouter: RootRouting?
 
-    init(interactor: BootstrapInteractable,
-         view: BootstrapPresentationView,
-         viewModel: BootstrapPresentationViewModel) {
-        self.viewModel = viewModel
-        super.init(interactor: interactor, view: view)
+    override init(interactor: BootstrapInteractable,
+                  viewModel: BootstrapPresentationViewModel,
+                  viewable: Viewable) {
+        super.init(interactor: interactor, viewModel: viewModel, viewable: viewable)
         interactor.router = self
     }
 }
@@ -32,7 +30,7 @@ extension BootstrapRouter: BootstrapRouting {
         let rootbuilder = RootBuilder(dependency: component)
         let router = rootbuilder.build()
         rootRouter = router
-        interactor.show(rootView: router.view)
+        interactor.show(rootView: router.viewable)
         router.activate()
         router.interactable.activate()
     }

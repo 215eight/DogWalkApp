@@ -11,7 +11,7 @@ import RIBs
 @main
 struct DogWalkApp: App {
 
-    private let bootstrapRouter: BootstrapRouter
+    private let bootstrapRouter: BootstrapRouting
 
     init() {
         let builder = BootstrapBuilder(dependency: EmptyComponent())
@@ -20,7 +20,7 @@ struct DogWalkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            bootstrapRouter.view
+            bootstrapRouter.viewable.view
                 .onAppear {
                     bootstrapRouter.activate()
                     bootstrapRouter.interactable.activate()

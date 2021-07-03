@@ -21,13 +21,12 @@ final class RootComponent: Component<RootDependency>, DogWalksDependency {
 }
 
 protocol RootBuilding: Buildable {
-    associatedtype RouterType: RootRouting
-    func build() -> RouterType
+    func build() -> RootRouting
 }
 
 final class RootBuilder: Builder<RootDependency>, RootBuilding {
 
-    func build() -> RootRouter {
+    func build() -> RootRouting {
         let component = RootComponent(dependency: dependency)
         let viewModel = RootViewModel()
         let view = RootView(viewModel: viewModel)
@@ -36,8 +35,8 @@ final class RootBuilder: Builder<RootDependency>, RootBuilding {
         let interactor = RootInteractor(controllable: viewModel,
                                         dogWalkService: component.dogWalkService)
         let router = RootRouter(interactor: interactor,
-                                view: presentationView,
                                 viewModel: presentationViewModel,
+                                viewable: presentationView,
                                 dogWalkBuilder: DogWalksBuilder(dependency: component))
         return router
     }

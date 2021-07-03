@@ -24,7 +24,7 @@ final class RootInteractor: ViewableInteractor<RootViewModel> {
     init(controllable: RootViewModel,
          dogWalkService: DogWalkServicing) {
         self.dogWalkService = dogWalkService
-        super.init(controllable: controllable)
+        super.init(viewModel: controllable)
     }
 
     override func didBecomeActive() {
@@ -32,11 +32,11 @@ final class RootInteractor: ViewableInteractor<RootViewModel> {
         dogWalkService.fetchDogs()
             .sink(receiveCompletion: { _ in },
                   receiveValue: { dogs in
-                    self.controllable.dogs = dogs
+                    self.viewModel.dogs = dogs
                   })
             .cancelOnDeactivate(interactor: self)
 
-        controllable.$selectedDog
+        viewModel.$selectedDog
             .compactMap { $0 }
             .sink(receiveValue: { dog in
                 self.router?.routeToDogWalks(dog: dog)

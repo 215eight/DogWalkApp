@@ -13,7 +13,7 @@ final class BootstrapPresentationViewModel: ObservableObject {
 
 }
 
-struct BootstrapPresentationView: Viewable {
+struct BootstrapPresentationView: View, Viewable {
 
     @ObservedObject private var viewModel: BootstrapPresentationViewModel
     private let bootstrapView: BootstrapView

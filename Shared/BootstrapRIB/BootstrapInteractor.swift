@@ -11,7 +11,7 @@ import SEPlatform
 
 protocol BootstrapInteractable: Interactable {
     var router: BootstrapRouter? { get set }
-    func show(rootView: RootPresentationView)
+    func show(rootView: Viewable)
 }
 
 final class BootstrapInteractor: ViewableInteractor<BootstrapViewModel> {
@@ -57,7 +57,7 @@ final class BootstrapInteractor: ViewableInteractor<BootstrapViewModel> {
 
 extension BootstrapInteractor: BootstrapInteractable {
 
-    func show(rootView: RootPresentationView) {
-        controllable.rootView = rootView
+    func show(rootView: Viewable) {
+        viewModel.rootView = rootView
     }
 }

@@ -26,18 +26,18 @@ final class DogWalksInteractor: ViewableInteractor<DogWalksViewModel> {
     init(controllable: DogWalksViewModel,
          dogWalkService: DogWalkServicing) {
         self.dogWalkService = dogWalkService
-        super.init(controllable: controllable)
+        super.init(viewModel: controllable)
     }
     override func didBecomeActive() {
         super.didBecomeActive()
-        dogWalkService.fetchWalks(dogId: controllable.dog.id)
+        dogWalkService.fetchWalks(dogId: viewModel.dog.id)
             .sink(receiveValue: { walks in
-                self.controllable.walks = walks
+                self.viewModel.walks = walks
             }, receiveError: { _ in
             })
             .cancelOnDeactivate(interactor: self)
 
-        controllable.$dismiss
+        viewModel.$dismiss
             .compactMap { $0 }
             .sink(receiveValue: { _ in
                 guard let router = self.router else { return }

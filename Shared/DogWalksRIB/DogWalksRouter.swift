@@ -10,10 +10,12 @@ import RIBs
 
 protocol DogWalksRouting: ViewableRouting {}
 
-final class DogWalksRouter: ViewableRouter<DogWalksInteractable, DogWalksPresentationView> {
+final class DogWalksRouter: ViewableRouter<DogWalksInteractable, DogWalksPresentationViewModel> {
 
-    override init(interactor: DogWalksInteractable, view: DogWalksPresentationView) {
-        super.init(interactor: interactor, view: view)
+    override init(interactor: DogWalksInteractable,
+                  viewModel: DogWalksPresentationViewModel,
+                  viewable: Viewable) {
+        super.init(interactor: interactor, viewModel: viewModel, viewable: viewable)
         interactor.router = self
     }
 }

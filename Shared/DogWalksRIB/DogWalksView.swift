@@ -32,7 +32,7 @@ struct DogWalksView: View {
             Text(walk.date.description)
         })
         .navigationTitle(viewModel.dog.name)
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(false)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button(action: {

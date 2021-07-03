@@ -19,21 +19,20 @@ final class BootstrapComponent: Component<EmptyDependency>, RootDependency {
     }
 }
 protocol BootstrapBuilding: Buildable {
-    associatedtype RouterType: BootstrapRouting
-    func build() -> RouterType
+    func build() -> BootstrapRouting
 }
 
 final class BootstrapBuilder: Builder<EmptyDependency>, BootstrapBuilding {
 
-    func build() -> BootstrapRouter {
+    func build() -> BootstrapRouting {
         let viewModel = BootstrapViewModel()
         let view = BootstrapView(viewModel: viewModel)
         let presentationViewModel = BootstrapPresentationViewModel()
         let presentationView = BootstrapPresentationView(viewModel: presentationViewModel, bootstrapView: view)
-        let interactor = BootstrapInteractor(controllable: viewModel)
+        let interactor = BootstrapInteractor(viewModel: viewModel)
         let router = BootstrapRouter(interactor: interactor,
-                                     view: presentationView,
-                                     viewModel: presentationViewModel)
+                                     viewModel: presentationViewModel,
+                                     viewable: presentationView)
         return router
     }
 }

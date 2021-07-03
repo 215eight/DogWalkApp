@@ -32,7 +32,7 @@ final class DogWalksBuilder: Builder<DogWalksDependency>, DogWalksBuilding {
         let presentationView = DogWalksPresentationView(viewModel: presentationViewModel, dogWalksView: view)
         let interactor = DogWalksInteractor(controllable: viewModel, dogWalkService: component.dependency.dogWalkService)
         interactor.listener = listener
-        let router = DogWalksRouter(interactor: interactor, view: presentationView)
+        let router = DogWalksRouter(interactor: interactor, viewModel: presentationViewModel, viewable: presentationView)
         return router
     }
 }
