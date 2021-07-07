@@ -16,7 +16,7 @@ protocol RootRouting: ViewableRouting {
 
 final class RootRouter: ViewableRouter<RootInteractable, RootPresentationViewModel> {
 
-    private var dogWalksRouter: DogWalksRouter?
+    private var dogWalksRouter: DogWalksRouting?
 
     private let dogWalkBuilder: DogWalksBuilder
 

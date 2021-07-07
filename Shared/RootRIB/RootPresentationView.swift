@@ -10,7 +10,7 @@ import Foundation
 import RIBs
 
 final class RootPresentationViewModel: ObservableObject {
-    @Published var navigationPresenter = NavigationPresenter<DogWalksRouter>()
+    @Published var navigationPresenter = NavigationPresenter()
 }
 
 struct RootPresentationView: View, Viewable {

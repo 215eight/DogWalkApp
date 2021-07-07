@@ -18,13 +18,12 @@ final class DogWalksComponent: Component<DogWalksDependency> {
 }
 
 protocol DogWalksBuilding: Buildable {
-    associatedtype RouterType: DogWalksRouting
-    func build(dog: Dog, listener: DogWalksListener) -> RouterType
+    func build(dog: Dog, listener: DogWalksListener) -> DogWalksRouting
 }
 
 final class DogWalksBuilder: Builder<DogWalksDependency>, DogWalksBuilding {
 
-    func build(dog: Dog, listener: DogWalksListener) -> DogWalksRouter {
+    func build(dog: Dog, listener: DogWalksListener) -> DogWalksRouting {
         let component = DogWalksComponent(dependency: dependency)
         let viewModel = DogWalksViewModel(dog: dog)
         let view = DogWalksView(viewModel: viewModel)
